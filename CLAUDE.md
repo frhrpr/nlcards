@@ -1,8 +1,8 @@
 # Dutch vocab flashcards
 
 Spaced-repetition vocab trainer for one learner — the user, learning Dutch
-for themselves. Repo: github.com/frhrpr/nlcards (to be created), to be served
-at https://frhrpr.github.io/nlcards/
+for themselves. Repo: github.com/frhrpr/nlcards, served at
+https://frhrpr.github.io/nlcards/
 
 **Copied from the Polish trainer on 2026-09-11** — `~/projects/flashcards`,
 github.com/frhrpr/flashcards, built for one of the user's students. That
