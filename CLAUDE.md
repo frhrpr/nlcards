@@ -193,8 +193,15 @@ Full reasoning in the Polish `CLAUDE.md`; one line each here.
   assume — all as in the Polish repo.
 - **`audio.py --tts-words` without `--only` rebuilds every word** and clears
   `reviewed` on all of them. Scope it.
-- **Generated pages are dark by default** (palette in `tools/review.py`);
-  declare `color-scheme`; images get a near-white mount.
+- **Everything is dark, the app included** (asked 2026-09-11) — same palette
+  as `tools/review.py`, `color-scheme: dark`, images on a near-white mount.
+  Print sheets, if any are ever made, go back to light.
+- **The Firebase `apiKey` in `index.html` is not a secret**, and GitHub's
+  secret scanner flags it anyway. A Firebase web key only identifies the
+  project; access is governed by the Firestore rule. It has been public in
+  the Polish repo since July. Close the alert as a false positive; do not
+  "rotate" it (that breaks the Polish app too). The real exposure is the
+  open rule, which is a deliberate choice — see Data storage.
 - Pushing and non-allowlisted network calls need `dangerouslyDisableSandbox`
   (the sandbox denies `~/.ssh`). Firestore REST works inside the sandbox.
 - `.env` holds `ELEVENLABS_API_KEY`, `GEMINI_API_KEY`, `OPENAI_API_KEY`

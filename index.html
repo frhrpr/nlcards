@@ -3,14 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
 <title>Nederlands</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#E8EBE4; --card:#FCFDFB; --ink:#181B18; --dim:#6C736B; --line:#C9CFC4;
-  --ok:#2F6B3E; --bad:#A32C22;
+  /* Dark only — the palette the Polish repo's generated pages use. The
+     "lead" and "reveal" buttons invert ink and card, so they read as light
+     buttons on the dark page. */
+  --paper:#15171a; --card:#1d2024; --ink:#e6e8e6; --dim:#9aa0a6; --line:#2e3339;
+  --ok:#7cc088; --bad:#e8796b; --badbg:#2a1d1c; --inkhover:#c9ccc9;
+  --mount:#f4f5f2;
   --sans:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
@@ -44,7 +49,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);padding:1.
 .msg-sub{display:inline-block;margin-top:.75rem;font-size:.8rem;opacity:.75}
 .msg.err{color:var(--bad);font-family:var(--mono);font-size:.82rem;text-align:left;white-space:pre-wrap}
 .warn{margin:0 0 1rem;padding:.6rem .75rem;border:1px solid var(--line);border-left:2px solid var(--bad);font-family:var(--mono);font-size:.7rem;line-height:1.5;color:var(--dim)}
-.warn.err{color:var(--bad);background:#F6EDEC}
+.warn.err{color:var(--bad);background:var(--badbg)}
 .gate{background:var(--card);border:1px solid var(--line);padding:1.75rem 1.5rem}
 .gate-h{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bad);margin:0 0 .75rem}
 .gate p{margin:0 0 1rem;font-size:.95rem;line-height:1.6;color:var(--dim)}
@@ -55,7 +60,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);padding:1.
 .card{background:var(--card);border:1px solid var(--line);padding:3rem 1.5rem;text-align:center;min-height:11rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
 .front{font-size:2.1rem;font-weight:300}
 .back{font-size:1.3rem;color:var(--dim)}
-.card img{max-width:100%;max-height:9rem;margin-top:.5rem;border-radius:4px}
+/* The images are lit photographs on pale grounds; a dark page showing
+   through their edges makes them look broken, so they get their own mount. */
+.card img{max-width:100%;max-height:9rem;margin-top:.5rem;border-radius:4px;background:var(--mount);padding:.35rem}
 .ipa{font-family:var(--mono);font-size:.85rem;color:var(--dim)}
 .play-big{width:4.5rem;height:4.5rem;font-size:1.6rem}
 .task{font-size:1rem;color:var(--dim);margin-bottom:.25rem}
@@ -72,7 +79,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);padding:1.
 
 button{font-family:inherit;cursor:pointer;border-radius:4px}
 .reveal{display:block;width:100%;margin-top:1.25rem;padding:1rem;background:var(--ink);color:var(--card);border:0;font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
-.reveal:hover{background:#2c322c}
+.reveal:hover{background:var(--inkhover)}
 .grades{display:flex;gap:.6rem;margin-top:1.25rem}
 .grades button{flex:1;padding:1rem;border:1px solid var(--line);background:var(--card);font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
 .g-again{color:var(--bad)} .g-again:hover{border-color:var(--bad)}
@@ -87,7 +94,7 @@ button{font-family:inherit;cursor:pointer;border-radius:4px}
 .mode-n{font-size:1.1rem;font-weight:300}
 .mode-sub{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--dim);text-align:right}
 .mode.lead{background:var(--ink);border-color:var(--ink);color:var(--card)}
-.mode.lead .mode-sub{color:var(--line)}
+.mode.lead .mode-sub{color:#555b61}
 .mode.is-done{background:none;border-style:dashed;color:var(--dim);cursor:default}
 .mode.is-done:hover{border-color:var(--line)}
 .mode.is-done .mode-n{font-weight:400}
