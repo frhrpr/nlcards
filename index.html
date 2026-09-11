@@ -1,0 +1,1342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nederlands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E8EBE4; --card:#FCFDFB; --ink:#181B18; --dim:#6C736B; --line:#C9CFC4;
+  --ok:#2F6B3E; --bad:#A32C22;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);padding:1.25rem 1rem calc(2rem + env(safe-area-inset-bottom))}
+.wrap{max-width:26rem;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:1.5rem}
+
+#bar{height:2px;background:var(--line);margin:0 0 1.25rem;display:none}
+#bar.on{display:block}
+#bar i{display:block;height:100%;background:var(--ink);width:0;transition:width .25s ease}
+.stats{background:var(--card);border:1px solid var(--line);padding:1.5rem}
+.stats h2{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 1.1rem;font-weight:400}
+.rows{display:grid;grid-template-columns:auto 1fr;gap:.45rem 1rem;align-items:baseline}
+.rows dt{font-size:.85rem;color:var(--dim)}
+.rows dd{margin:0;font-family:var(--mono);font-size:1rem;text-align:right}
+.rows dd.big{font-size:1.6rem;font-weight:300;font-family:var(--sans)}
+.rows .muted{color:var(--dim)}
+.done{text-align:center}
+.done-h{font-size:1.35rem;font-weight:300;margin:.5rem 0 .25rem}
+.done-sub{color:var(--dim);margin:0 0 1.5rem}
+.done-cta{font-family:var(--mono);font-size:.95rem;letter-spacing:.04em;
+  color:var(--ok);margin:0 0 1.75rem;padding:.85rem;border:1px solid var(--ok);border-radius:4px}
+.rows.small{text-align:left;font-size:.9rem}
+.rows.small dd{font-size:.95rem}
+.aside{margin:1.5rem 0 0;font-size:.72rem;line-height:1.5;color:var(--dim);opacity:.7}
+.foot{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.8rem;color:var(--dim);line-height:1.5}
+.msg{text-align:center;padding:3rem 1rem;color:var(--dim);font-size:1rem;line-height:1.6}
+.msg-sub{display:inline-block;margin-top:.75rem;font-size:.8rem;opacity:.75}
+.msg.err{color:var(--bad);font-family:var(--mono);font-size:.82rem;text-align:left;white-space:pre-wrap}
+.warn{margin:0 0 1rem;padding:.6rem .75rem;border:1px solid var(--line);border-left:2px solid var(--bad);font-family:var(--mono);font-size:.7rem;line-height:1.5;color:var(--dim)}
+.warn.err{color:var(--bad);background:#F6EDEC}
+.gate{background:var(--card);border:1px solid var(--line);padding:1.75rem 1.5rem}
+.gate-h{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bad);margin:0 0 .75rem}
+.gate p{margin:0 0 1rem;font-size:.95rem;line-height:1.6;color:var(--dim)}
+.gate .reveal{margin-top:.5rem}
+.reveal.alt{background:none;color:var(--dim);border:1px solid var(--line)}
+.reveal.alt:hover{background:none;border-color:var(--dim);color:var(--ink)}
+
+.card{background:var(--card);border:1px solid var(--line);padding:3rem 1.5rem;text-align:center;min-height:11rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
+.front{font-size:2.1rem;font-weight:300}
+.back{font-size:1.3rem;color:var(--dim)}
+.card img{max-width:100%;max-height:9rem;margin-top:.5rem;border-radius:4px}
+.ipa{font-family:var(--mono);font-size:.85rem;color:var(--dim)}
+.play-big{width:4.5rem;height:4.5rem;font-size:1.6rem}
+.task{font-size:1rem;color:var(--dim);margin-bottom:.25rem}
+.task-sub{font-family:var(--mono);font-size:.68rem;line-height:1.5;color:var(--dim);opacity:.75;margin-bottom:.5rem}
+.sent-gap{font-size:1.1rem;line-height:1.5;color:var(--ink)}
+.sent{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);width:100%}
+.sent-nl{font-size:1.05rem;line-height:1.5;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.sent-nl .play{width:2rem;height:2rem;font-size:.75rem;flex:none}
+.sent-en{font-size:.85rem;color:var(--dim);margin-top:.35rem}
+.gram{margin-top:1rem;padding-top:.75rem;border-top:1px solid var(--line);width:100%;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--dim)}
+.note{margin-top:.5rem;font-size:.8rem;color:var(--dim);font-style:italic}
+.play{background:none;border:1px solid var(--line);border-radius:50%;width:2.5rem;height:2.5rem;font-size:1rem;cursor:pointer;color:var(--ink)}
+.play:hover{border-color:var(--dim)}
+
+button{font-family:inherit;cursor:pointer;border-radius:4px}
+.reveal{display:block;width:100%;margin-top:1.25rem;padding:1rem;background:var(--ink);color:var(--card);border:0;font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+.reveal:hover{background:#2c322c}
+.grades{display:flex;gap:.6rem;margin-top:1.25rem}
+.grades button{flex:1;padding:1rem;border:1px solid var(--line);background:var(--card);font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+.g-again{color:var(--bad)} .g-again:hover{border-color:var(--bad)}
+.g-good{color:var(--ok)} .g-good:hover{border-color:var(--ok)}
+
+/* ── landing: pick a mode ─────────────────────────────────────────── */
+.modes{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.25rem}
+.mode{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  width:100%;text-align:left;background:var(--card);border:1px solid var(--line);
+  padding:1.1rem 1.25rem;color:var(--ink)}
+.mode:hover{border-color:var(--dim)}
+.mode-n{font-size:1.1rem;font-weight:300}
+.mode-sub{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--dim);text-align:right}
+.mode.lead{background:var(--ink);border-color:var(--ink);color:var(--card)}
+.mode.lead .mode-sub{color:var(--line)}
+.mode.is-done{background:none;border-style:dashed;color:var(--dim);cursor:default}
+.mode.is-done:hover{border-color:var(--line)}
+.mode.is-done .mode-n{font-weight:400}
+
+.lighter{display:block;width:100%;margin:-.2rem 0 0;padding:.6rem;background:none;
+  border:0;color:var(--dim);font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
+  text-align:center;text-decoration:underline;text-underline-offset:3px}
+.lighter:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="eyebrow" id="mode-label">Nederlands</span>
+    <span class="eyebrow" id="count"></span>
+  </div>
+  <div id="bar"><i></i></div>
+  <div id="warn"></div>
+  <div id="app"><p class="msg">Loading…</p></div>
+</div>
+
+<script type="module">
+/* ══════════════════════════════════════════════════════════════════
+   Firebase project config — console → gear → Project settings → your
+   web app → SDK setup and configuration. Not a secret: Firestore access
+   is governed by the rule on the collection, not by this key.
+   ══════════════════════════════════════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyAZD5VoyBU22jaSBpajmbUiO-ZW8WDkEEo",
+  authDomain: "flashcards-f5b40.firebaseapp.com",
+  projectId: "flashcards-f5b40",
+  storageBucket: "flashcards-f5b40.firebasestorage.app",
+  messagingSenderId: "24461231038",
+  appId: "1:24461231038:web:87e1160e6008d9d6b0efef"
+};
+
+/* ══════════════════════════════════════════════════════════════════
+   Below here you shouldn't need to touch anything. Vocabulary lives in
+   deck/notes.json — adding a word means editing that file, not this
+   one. Run tools/validate.py after a deck edit and tools/smoke.mjs
+   after any edit to this file.
+
+   This file was copied from the Polish trainer (github.com/frhrpr/
+   flashcards) on 2026-09-11. Where a comment below cites a date, a Polish
+   word, or "he", it describes that deck and its student: the measurements
+   behind the constants were made there, and they are kept because the
+   reasoning carries over even though the numbers were not re-measured.
+   ══════════════════════════════════════════════════════════════════ */
+
+const $ = sel => document.querySelector(sel);
+const appEl = $("#app"), countEl = $("#count"), warnEl = $("#warn");
+
+function showError(msg){
+  appEl.innerHTML = `<p class="msg err">${msg}</p>`;
+}
+
+const { initializeApp } = await import("https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js");
+const { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, FieldPath } =
+  await import("https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js");
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* ── identity: the link is the login ──────────────────────────────
+   No signup, no password. The URL carries a long random ID; whoever
+   has the link has the data. Fine for a private study tool, not a
+   real access-control system — see the README note on this.
+
+   Opening the wrong link silently starts an empty deck, which is the one
+   genuinely confusing failure this design allows. So both odd cases —
+   no id at all, and a URL id that disagrees with the one last used on this
+   device — stop and say so before any reviewing happens.
+
+   The localStorage key is namespaced, and that is not cosmetic. This app and
+   the Polish one (frhrpr.github.io/flashcards/) are served from the same
+   origin, so they share one localStorage. Under the old key "vocab-uid",
+   opening either app would claim the other's identity.
+
+   Ids are minted with an "nl-" prefix because this deck lives in the same
+   Firestore collection as the Polish students' decks; the prefix is how
+   tools/progress.py tells them apart without being told. */
+const UID_KEY = "nl-vocab-uid";
+function getUserId(){
+  const params = new URLSearchParams(location.search);
+  const fromUrl = params.get("u");
+  const stored  = localStorage.getItem(UID_KEY);
+
+  /* ?u=<id>&peek — look at the deck as it stands without touching it.
+     Does not write localStorage and does not run the identity gate below. */
+  if (params.has("peek")) return { id: fromUrl, stored, alert: null, peek: true };
+
+  if (!fromUrl && !stored) {
+    const id = "nl-" + crypto.randomUUID();
+    history.replaceState(null, "", "?u=" + id);
+    return { id, stored, alert: "new" };
+  }
+  if (fromUrl && stored && fromUrl !== stored) {
+    // Deliberately does NOT overwrite the stored id: if this is a misclick
+    // on an old link, the usual session stays recoverable.
+    return { id: fromUrl, stored, alert: "switched" };
+  }
+  const id = fromUrl || stored;
+  // Put a localStorage-recovered id back in the URL so the link stays copyable.
+  if (!fromUrl) history.replaceState(null, "", "?u=" + id);
+  localStorage.setItem(UID_KEY, id);
+  return { id, stored, alert: null };
+}
+
+function confirmIdentity(alert, id, stored){
+  return new Promise(resolve => {
+    countEl.textContent = "";
+    appEl.innerHTML = alert === "new" ? `
+      <div class="gate">
+        <p class="gate-h">New, empty deck</p>
+        <p>This link has no saved progress on it. If you have used this
+        trainer before, close this and open your usual bookmarked link —
+        carrying on here will start you from zero.</p>
+        <button class="reveal" id="go">Start a new deck anyway</button>
+      </div>` : `
+      <div class="gate">
+        <p class="gate-h">Different deck</p>
+        <p>This link is not the one you last used on this device. Your
+        progress is not lost — it is on the other link.</p>
+        <button class="reveal" id="back">Go to my usual deck</button>
+        <button class="reveal alt" id="go">Use this link instead</button>
+      </div>`;
+    $("#go").addEventListener("click", () => {
+      localStorage.setItem(UID_KEY, id);
+      resolve();
+    });
+    const back = $("#back");
+    if (back) back.addEventListener("click", () => {
+      location.search = "?u=" + stored;
+    });
+  });
+}
+
+const { id: uid, stored: storedUid, alert: idAlert, peek } = getUserId();
+const PEEK = !!peek;
+if (PEEK && !uid) {
+  showError("Peek needs a deck to look at.\n\nUse ?u=<their id>&peek");
+  throw new Error("peek without a target");
+}
+/* Any id beginning "test" is a scratch session: it reviews normally but
+   never writes, so poking at the app does not leave documents behind. */
+const TEST_MODE = /^test/i.test(uid);
+/* Both never write. They differ in what they show: a test session is a
+   scratch deck of its own and skips the maturity gate so every card type is
+   visible at once, while a peek shows exactly what the real deck would show,
+   gate and all — a preview that lied about the gate would be worthless. */
+const READ_ONLY = TEST_MODE || PEEK;
+if (idAlert) await confirmIdentity(idAlert, uid, storedUid);
+const docRef = doc(db, "progress", uid);
+
+/* Every write in this file goes through `write`, and in a read-only session
+   both members are stubs. The per-caller READ_ONLY checks below are belt to
+   this braces: peek points at real progress, so "nothing can write"
+   has to be a property of the plumbing rather than a promise each caller
+   remembers to keep. */
+const write = READ_ONLY
+  ? { set: async () => {}, update: async () => {} }
+  : { set: setDoc, update: updateDoc };
+
+/* ── SM-2-lite scheduling ──────────────────────────────────────────
+   Two grades only: again / good. Ease starts at 2.5 and only moves
+   on a lapse. Intervals: 1 day, 6 days, then ivl * ease. This is a
+   deliberately simplified SM-2 — no Hard/Easy, no sub-day learning
+   steps. A card marked "again" is also nudged back into today's
+   session queue so it comes up again this sitting, not just tomorrow. */
+const MS_DAY = 86400000;
+
+/* ── cards per note ────────────────────────────────────────────────
+   One note will eventually spawn several cards (recognition, production,
+   listening, cloze). Only recognition exists today, but scheduling state is
+   keyed per *card* from the start, so adding a type later is a data change
+   rather than a migration of live progress.
+
+   Keys are `${noteId}__${cardType}`. Keep note ids to [A-Za-z0-9_]: the key
+   is used as a Firestore field path in save(), and anything outside that
+   set would need backtick quoting. */
+const cardKey = (noteId, type) => `${noteId}__${type}`;
+const noteOf  = key => key.slice(0, key.lastIndexOf("__"));
+const typeOf  = key => key.slice(key.lastIndexOf("__") + 2);
+/* Which cards a note produces is data, not code — set `cards` in
+   deck/notes.json. A type whose material is missing is dropped rather than
+   rendering a blank card: no audio means no listening card, since its whole
+   front is the recording. */
+const NEEDS = {
+  listening: n => n.audio,
+};
+function typesFor(note){
+  return (note.cards || ["recognition"]).filter(t => !NEEDS[t] || NEEDS[t](note));
+}
+
+/* Daily intake: a total in *cards*, with a reservation for new *words* inside
+   it. Two numbers, and they answer two different questions.
+
+   `NEW_CARDS_PER_DAY` is the time knob. Cards are what cost minutes, and the
+   plateau of the whole system is (cards introduced per day) x (answers a card
+   costs before it retires), so this is the number that decides how long a
+   session eventually takes.
+
+   `NEW_WORDS_PER_DAY` is the teaching knob — three a day, matched to what he
+   meets in a lesson. It is a *reservation*, not a second pool: new words are
+   taken first so that an unlocking backlog can never crowd vocabulary out
+   entirely, which is the failure this budget has always existed to prevent.
+
+   **Ten, because the sibling arrival rate is not a free parameter.** Measured
+   over the deck, a word note carries 1.99 siblings, so three words a day
+   generate six sibling cards a day, for ever. The old design capped siblings
+   separately at five — below the arrival rate — so one card a day was
+   deferred permanently rather than smoothed, and 43 cards had piled up behind
+   it by 2026-09-09, listening worst. A queue served at its arrival rate never
+   empties; it has to be served faster. Nine is the steady state, so ten leaves
+   exactly enough headroom to drain a backlog at one a day, and to absorb a
+   lump without one forming.
+
+   The first session gets a larger allowance because there is nothing to review
+   yet and finishing after two cards feels like the app is broken — a day-one
+   problem, not a reason to top up every quiet day afterwards. No siblings can
+   exist that day, so one number covers it. */
+const NEW_WORDS_PER_DAY = 3;
+const NEW_CARDS_PER_DAY = 10;
+const FIRST_SESSION_WORDS = 10;
+
+/* Firestore caps a document at 1 MiB. We warn well before that; see
+   logBytes() for why the estimate errs high. */
+const DOC_LIMIT = 1048576;
+const WARN_AT   = 0.7;
+
+function today(){ const d = new Date(); d.setHours(0,0,0,0); return d.getTime(); }
+function newCardState(){ return { ivl: 0, ease: 2.5, reps: 0, due: today() }; }
+/* Jitter, so that words introduced together do not come back together for
+   ever. Nothing in the scheduler was random: two cards answered correctly on
+   the same day had byte-identical intervals from then on, so a batch marched
+   in lockstep. Measured on 2026-09-09, all 8 cards introduced on 31 August
+   were due on the same day, and 10 of the 13 from 5 September.
+
+   That is two problems. The load arrives in spikes — his next three weeks ran
+   0, 12, 23, 2, 15, 3 … — and, worse, a cohort carded together stays together,
+   which is the interference that took `często` to the ease floor.
+
+   **The due date is jittered; the interval is not.** `ivl` is load-bearing in
+   three other places — RETIRE_IVL, the maturity buckets in progress.py, and
+   until today the unlock gate — and fuzzing it would move a card across those
+   boundaries for no reason. Moving only the day it comes back leaves every
+   one of them exact.
+
+   It still compounds, which is the point: he answers on the jittered day, and
+   the next interval is counted from there, so a cohort's spread is a random
+   walk rather than a fixed offset.
+
+   5%, floor one day. Simulated over a cohort of nine for 400 days, the worst
+   single day falls from 6.6 cards to 4.7; 10% gives 4.6 and 25% gives 4.2, so
+   nearly all of it is bought by the first 5% and the rest distorts the
+   schedule for very little. Intervals below 6 are left alone — reps 1 always
+   means "tomorrow", and there is nothing to spread there.
+
+   Derived from the card and its state rather than Math.random, so it is a
+   pure function: the same card in the same state always gets the same offset,
+   which is what makes it testable. */
+const FUZZ = 0.05;
+function fuzzDays(key, s){
+  if (s.ivl < 6) return 0;
+  const f = Math.max(1, Math.round(s.ivl * FUZZ));
+  let h = 2166136261;
+  for (const ch of `${key}:${s.reps}:${s.ivl}`)
+    h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  return ((h >>> 0) % (2 * f + 1)) - f;
+}
+
+function schedule(state, grade, key){
+  const s = { ...state };
+  if (grade === "again") {
+    s.reps = 0;
+    s.ease = Math.max(1.3, s.ease - 0.2);
+    s.ivl = 1;
+    s.due = today() + MS_DAY;
+  } else {
+    s.reps += 1;
+    /* Ease recovers, but has to be earned. A lapse costs 0.2 in one moment;
+       a success returns 0.15, and only from the third in a row — which is
+       also the point at which ease starts affecting the interval at all.
+       Without this, ease only ever fell: a word failed during a bad
+       fortnight stayed on short intervals for good, long after it was
+       learned. Climbing from the 1.3 floor back to 2.5 takes ten consecutive
+       correct answers, which is a demonstration rather than a gift. */
+    if (s.reps >= 3) s.ease = Math.min(2.5, s.ease + 0.15);
+    if (s.reps === 1) s.ivl = 1;
+    else if (s.reps === 2) s.ivl = 6;
+    else s.ivl = Math.round(s.ivl * s.ease);
+    s.due = today() + (s.ivl + fuzzDays(key, s)) * MS_DAY;
+  }
+  return s;
+}
+
+/* ── load, build today's queue ─────────────────────────────────── */
+/* ── the deck ───────────────────────────────────────────────────────
+   deck/notes.json is the single source of truth for card content, fetched
+   rather than inlined so adding a word never means editing this file.
+   Validate it with tools/validate.py before pushing. */
+let NOTES;
+try {
+  const res = await fetch("deck/notes.json", { cache: "no-cache" });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const deck = await res.json();
+  if (deck.schema !== 1) throw new Error(`unexpected schema version ${deck.schema}`);
+  // An empty deck is a valid state here, not an error: the landing says to
+  // add some words, which is the truth.
+  if (!Array.isArray(deck.notes)) throw new Error("deck has no notes array");
+  NOTES = Object.fromEntries(deck.notes.map(n => [n.id, n]));
+} catch (e) {
+  showError("Couldn't load the deck (deck/notes.json).\n\n" + e.message +
+    "\n\nIf you opened this file straight from disk, that's the reason —\n" +
+    "the deck is fetched over HTTP. Use the GitHub Pages link instead.");
+  throw e;
+}
+
+let cardStates = {};
+let reviewLog = [];
+/* Which modes were finished on which day, so a reload or his other device
+   does not re-offer a session he has already done. Same reasoning as the
+   `introduced` stamps on card state. */
+let doneDays = {};
+// Declared here, not with the rest of the extra-study state further down:
+// the loader below fills both, and a `let` assigned before its declaration
+// is evaluated throws. It did — the page failed to boot with
+// "can't access lexical declaration 'extraRuns' before initialization".
+let extraRuns = {};
+let docExists = false;
+try {
+  const snap = await getDoc(docRef);
+  docExists = snap.exists();
+  cardStates = docExists ? (snap.data().cards || {}) : {};
+  reviewLog = docExists ? (snap.data().log || []) : [];
+  doneDays  = docExists ? (snap.data().done || {}) : {};
+  extraRuns = docExists ? (snap.data().extra || {}) : {};
+} catch (e) {
+  showError("Couldn't reach Firestore.\n\n" + e.message +
+    "\n\nCheck: the config is correct, Firestore is enabled, and the\n" +
+    "security rule (see top of this file) has been published.");
+  throw e;
+}
+
+const t = today();
+
+const allCards = Object.values(NOTES).flatMap(
+  n => typesFor(n).map(type => cardKey(n.id, type))
+);
+
+/* `introduced` is stamped on a card's first grade, so these counts survive a
+   reload and a second device. A word counts as introduced on the day its
+   *first* card was, not each time another of its types starts. */
+const firstSeen = {};
+for (const [k, st] of Object.entries(cardStates)) {
+  if (st.introduced == null) continue;
+  const n = noteOf(k);
+  firstSeen[n] = Math.min(firstSeen[n] ?? Infinity, st.introduced);
+}
+const wordsToday = Object.values(firstSeen).filter(d => d === t).length;
+const siblingsToday = Object.entries(cardStates)
+  .filter(([k, st]) => st.introduced === t && firstSeen[noteOf(k)] < t).length;
+const everStudied = reviewLog.length > 0;
+const wordBudget = Math.max(0,
+  (everStudied ? NEW_WORDS_PER_DAY : FIRST_SESSION_WORDS) - wordsToday);
+const cardBudget = Math.max(0,
+  (everStudied ? NEW_CARDS_PER_DAY : FIRST_SESSION_WORDS)
+  - wordsToday - siblingsToday);
+
+/* Order. Sorting by due date alone left the sequence identical every
+   session and introduced new words in file order, so the last notes in the
+   file would wait for every earlier one. Both are worth avoiding: fixed
+   order lets a word be recalled from its neighbour rather than on its own.
+
+   The shuffle is seeded on the day plus the user id, so it is stable across
+   a reload — refreshing mid-session should not reshuffle the deck under him
+   — but different tomorrow, and different per student. */
+function rng(seed){
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let x = Math.imul(a ^ (a >>> 15), 1 | a);
+    x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const daySeed = [...(uid + ":" + t)].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619), 2166136261);
+const rand = rng(daySeed);
+
+function shuffle(arr){
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* Staged unlock, per type. Meeting a brand-new word in three directions at
+   once mostly generates failures, so the harder types wait until the
+   recognition card has been answered correctly a few times running:
+
+     production  2 in a row   the day after the word is introduced
+     listening   3 in a row   a week in
+
+   Listening is pushed further back deliberately: reading gives him the
+   spelling to lean on, and the recording gives him nothing, so ear training
+   wants a firmer foundation than production does.
+
+   **Counted in reps, not in the interval, and that is a bug fix.** These were
+   `ivl >= 6` and `ivl >= 15`, chosen because a clean card runs 1, 6, 15, 38 —
+   but only a card at the full 2.5 ease lands on exactly 15. One that has ever
+   lapsed computes `round(6 * 2.35) = 14` and misses the gate, so listening
+   waited an entire extra step: 33 days instead of 15. On 2026-09-09 six of his
+   cards were sitting there, and they were his hardest — być, chcieć, wiedzieć,
+   iść, płacić, ręka — the words most in need of the card being withheld. Reps
+   say what was always meant and cannot be undershot.
+
+   The gate only governs *introducing* a card. Once a card has state it stays
+   in rotation, so a later lapse on recognition does not yank away work
+   already under way. */
+const UNLOCK_REPS = { production: 2, listening: 3 };
+
+function unlocked(key){
+  // A scratch session is for looking at the app, not for learning — waiting
+  // a week to see a production card would defeat the point.
+  // A peek must show the gate, not skip it — see READ_ONLY above.
+  if (TEST_MODE) return true;
+  const n0 = NOTES[noteOf(key)];
+  /* A conjugation drill waits on the verb it conjugates, not on itself —
+     it has no recognition card of its own to mature. */
+  if (n0 && n0.kind === "form") {
+    const base = cardStates[cardKey(n0.parent, "recognition")];
+    return !!base && base.reps >= UNLOCK_REPS.production;
+  }
+  const need = UNLOCK_REPS[typeOf(key)];
+  if (need === undefined) return true;
+  const note = NOTES[noteOf(key)];
+  // A note that produces no recognition card has nothing to gate against.
+  if (!typesFor(note).includes("recognition")) return true;
+  const base = cardStates[cardKey(noteOf(key), "recognition")];
+  return !!base && base.reps >= need;
+}
+
+/* At most one *new* card per note per day. A note's cards are siblings —
+   answering one gives away the others — so introducing three at once would
+   waste two of them. Burying (see grade) enforces the same rule for reviews;
+   this stops the daily budget being spent on cards that would be buried. */
+const started = new Set(Object.keys(cardStates).map(noteOf));
+const isForm = k => (NOTES[noteOf(k)] || {}).kind === "form";
+
+/* Which words come out of the bank first. A note marked `priority: true` in
+   deck/notes.json is introduced ahead of the rest — for the words from a
+   lesson, so the story he has just been told is what turns up next.
+
+   Deliberately narrow. It reorders the *bank* of not-yet-seen cards and
+   nothing else: reviews are untouched, the daily budgets are untouched, and
+   it does not bypass the maturity gate below — a prioritised production card
+   still waits for its recognition card to mature, or "priority" would come
+   to mean "show three cards for a word he met yesterday", which is what
+   burying and gating exist to prevent.
+
+   The sort is stable, so the day's shuffle survives inside each band: the
+   prioritised words still arrive in a different order every day.
+
+   It needs no cleaning up. Priority only affects cards with no state yet, so
+   the flag goes inert the moment a word is introduced. */
+function bankOrder(cards){
+  const prio = k => (NOTES[noteOf(k)] || {}).priority ? 1 : 0;
+  return cards.slice().sort((a, b) => prio(b) - prio(a));
+}
+
+/* Whether a card may come out of the bank at all. A note no human has read
+   must never reach him: the app is served straight from the repo, so without
+   this the only thing between a half-written sentence and the student is
+   remembering not to push. Strict — the flag must be exactly true — so a
+   note that loses the key is withheld rather than quietly shipped;
+   validate.py refuses a deck where it is missing, so this cannot go unseen. */
+function introducible(k){
+  return (NOTES[noteOf(k)] || {}).reviewed === true;
+}
+
+/* Retirement. A card whose interval has reached RETIRE_IVL leaves rotation
+   for good and is never shown again.
+
+   It is needed because intervals grow but the deck grows too, and the deck
+   wins. `ivl * ease` is unbounded — a card answered right forever runs 1, 6,
+   15, 38, 95, 238, 595 days — so each card's cost does decay, just not fast
+   enough to offset a word a day arriving behind it. Without retirement the
+   daily session grows without limit: simulated on his real numbers, three
+   words a day reaches 13 minutes at one year and 20 at five, and is still
+   climbing. With retirement it flattens.
+
+   180 days rather than a rounder number because the thresholds are not
+   continuous. The interval ladder above means every threshold from 96 to 238
+   retires a card at exactly the same moment — the sixth consecutive correct
+   answer, about eight months in. 180 is the middle of that band and says what
+   it means: six in a row, and we stop asking. 365 would sit in the *next*
+   band and cost a quarter more reviews per card for one extra look every
+   twenty months.
+
+   Derived, never stored. There is no `retired` flag on card state, no
+   migration and no write: lowering or raising this constant brings cards back
+   or sends them away on the next load. A stored flag would make the decision
+   irreversible, which is the wrong shape for a number chosen by simulation.
+
+   The consequence to be honest about: a retired card is never shown, so its
+   interval never changes, so nothing can un-retire it. This is a claim that
+   six correct answers spread over eight months means the word is his. If that
+   turns out to be wrong, the evidence will be indirect — a retired word
+   failing inside a sentence on another card — and the remedy is to lower this
+   number, or to withdraw the note and let it come round again. */
+const RETIRE_IVL = 180;
+/* Named `cardRetired` in the Polish app to dodge the ear trainer's `retired`;
+   the name is kept so the two files stay easy to compare. */
+function cardRetired(k){
+  const st = cardStates[k];
+  return !!st && st.ivl >= RETIRE_IVL;
+}
+/* New cards used to be appended, so every one of them arrived at the end of
+   the session: the most effortful cards landing when he is most tired, and
+   the gapped production cards clustering worst of all, since they unlock
+   later than recognition and so are the ones most often still new. Spread
+   them through the reviews instead, after a short warm-up.
+
+   Due cards keep their own order — due date dominates, ties broken by the
+   day's shuffle — this only decides where the new ones are dropped in. */
+const WARMUP_REVIEWS = 3;
+function interleave(due, neu){
+  if (!neu.length || !due.length) return [...due, ...neu];
+  const out = [...due];
+  const start = Math.min(WARMUP_REVIEWS, out.length);
+  const step = (out.length - start) / neu.length;
+  // +i because each splice shifts every later position along by one.
+  neu.forEach((k, i) => out.splice(Math.round(start + step * i) + i, 0, k));
+  return out;
+}
+/* ── end of bank order ─────────────────────────────────────────────── */
+
+const ordered = bankOrder(shuffle([...allCards]));
+const rank = new Map(ordered.map((k, i) => [k, i]));
+const freshSeen = new Set();
+const fresh = [];
+let lockedCount = 0, words = 0, siblings = 0;
+/* Two passes over the same list. New words claim their reservation first,
+   then siblings take whatever is left of the day's total — that ordering is
+   the whole point of having a word budget at all, and a single pass could
+   spend the day's cards on a sibling backlog before reaching any new word. */
+for (const wantWords of [true, false]) {
+  for (const k of ordered) {
+    if (cardStates[k]) continue;
+    /* Sits after the state check, so it can only ever withhold a card never
+       seen — a flag cleared by accident (audio.py did exactly that once)
+       cannot yank back work under way, the rule the maturity gate follows too.
+       Not counted as locked: locked means waiting on his own progress, and
+       this is waiting on the teacher. */
+    if (!introducible(k)) continue;
+    if (!unlocked(k)) { if (wantWords) lockedCount++; continue; }
+    if (freshSeen.has(noteOf(k))) continue;        // one card per note per day
+    /* A conjugation drill is not new vocabulary — the form was taught in the
+       lesson — so it counts as a sibling rather than against the word
+       reservation, and trickles in like any other card. */
+    const isNewWord = !isForm(k) && !started.has(noteOf(k));
+    if (isNewWord !== wantWords) continue;
+    if (words + siblings >= cardBudget) break;
+    if (isNewWord && words >= wordBudget) continue;
+    isNewWord ? words++ : siblings++;
+    freshSeen.add(noteOf(k));
+    fresh.push(k);
+  }
+}
+// Back into bank order, so the two passes do not arrive as two blocks.
+fresh.sort((a, b) => rank.get(a) - rank.get(b));
+
+const dueCards = shuffle(allCards.filter(
+    k => cardStates[k] && cardStates[k].due <= t && !cardRetired(k)))
+  .sort((a, b) => cardStates[a].due - cardStates[b].due);
+let queue = interleave(dueCards, fresh);
+/* A "just reviews" session drops the new cards. Skipping them creates no
+   debt: the daily budget is counted from `introduced` stamps, so tomorrow
+   is three again rather than six. A tired day must not buy a punishing one. */
+let vocabLight = false;
+
+let current = null;
+let revealed = false;
+
+/* ── persistence ───────────────────────────────────────────────────
+   Write a delta, not the whole document. The previous setDoc re-uploaded
+   every card state *and* the entire review log on every single grade — a
+   few hundred KB per button press once the log is long, which is felt on a
+   phone long before the 1 MiB document ceiling is anywhere in sight. */
+// updateDoc requires an existing document; first run has to create one.
+async function firstWrite(){
+  await write.set(docRef, {
+    cards: cardStates, done: doneDays, extra: extraRuns,
+    log: reviewLog, logBytes: logBytes(), updated: Date.now()
+  });
+  docExists = true;
+}
+
+async function save(key, state, entry){
+  if (READ_ONLY) return;
+  if (!docExists) return firstWrite();
+  await write.update(docRef, {
+    [`cards.${key}`]: state,
+    // arrayUnion is set-semantics: an entry identical in card, grade *and*
+    // millisecond timestamp would be dropped. Not reachable in practice.
+    log: arrayUnion(entry),
+    logBytes: logBytes(),
+    updated: Date.now(),
+  });
+}
+
+/* JSON length runs a little above Firestore's own accounting, which is the
+   safe direction for a warning. Also stored on the document each save, so
+   the number is visible in the Firebase console without opening the app. */
+function logBytes(){ return JSON.stringify(reviewLog).length; }
+
+/* Grading used to await the server ack before drawing the next card, which
+   put a visible stall on every button press. Writes now go out behind the
+   UI, chained so they stay ordered and so two fast grades can't both take
+   the "document doesn't exist yet" branch in save(). The Firestore SDK
+   retries a queued write on its own; what it can't survive is the tab being
+   closed mid-flight, so a failure has to be visible rather than swallowed. */
+let writeChain = Promise.resolve();
+let writeError = null;
+
+function queueWrite(key, state, entry){
+  writeChain = writeChain
+    .then(() => save(key, state, entry))
+    .then(() => { writeError = null; })
+    .catch(e => { writeError = e; console.error("save failed", e); })
+    .finally(renderWarning);
+  return writeChain;
+}
+
+function renderWarning(){
+  const banners = [];
+  if (PEEK) {
+    banners.push(`<p class="warn">Looking at <b>${esc(uid)}</b> without ` +
+      `touching it. Nothing here is saved — grade freely, reload to reset.</p>`);
+  } else if (TEST_MODE) {
+    banners.push(`<p class="warn">Test session — nothing is saved. ` +
+      `Reload to start over.</p>`);
+  }
+  if (writeError) {
+    banners.push(`<p class="warn err">Not saving. The last review did not reach ` +
+      `the server (${writeError.message}). Check your connection — progress from ` +
+      `here on may be lost.</p>`);
+  }
+  const bytes = logBytes();
+  if (bytes >= DOC_LIMIT * WARN_AT) {
+    const pct = Math.round(bytes / DOC_LIMIT * 100);
+    banners.push(`<p class="warn">Review log is at ~${pct}% of the 1 MiB ` +
+      `Firestore document limit (${reviewLog.length} entries). Trim or archive it.</p>`);
+  }
+  warnEl.innerHTML = banners.join("");
+}
+
+const barEl = $("#bar");
+let sessionDone = 0;
+
+/* Extra study. He asked for a way to do more on a day he feels like it,
+   without it becoming a second obligation, so it appears only once the day is
+   already finished and it is never offered as something outstanding.
+
+   New cards save; practice reviews do not. The asymmetry is the whole design:
+   introducing a word is real progress and should stick, but grading a card
+   days before it is due corrupts the interval — a "Good" answered early was
+   measured at the wrong point and the scheduler cannot tell.
+
+   `extraSaves` is fixed when the session opens rather than tested per grade,
+   so a card cannot start as practice and become savable by being answered
+   twice. */
+let extraMode = false;
+let extraSaves = new Set();
+const EXTRA_NEW = 3;
+const EXTRA_PRACTICE = 12;
+
+function midnight(ms){ const d = new Date(ms); d.setHours(0,0,0,0); return d.getTime(); }
+
+/* Everything the two summary screens show, derived from state rather than
+   tracked separately, so it cannot drift from what the queue actually does. */
+function stats(){
+  const withState = allCards.filter(k => cardStates[k]);
+  /* A retired card keeps its state and still counts as started — he did
+     learn it — but it is not due, and it must not be what `nextDue` points
+     at, or the closing screen would tell him to come back in eight months. */
+  const live = withState.filter(k => !cardRetired(k));
+  const future = live.filter(k => cardStates[k].due > t).map(k => cardStates[k].due);
+  const days = [...new Set(reviewLog.map(e => midnight(e.ts)))].sort((a, b) => b - a);
+  let streak = 0;
+  if (days.length && (days[0] === t || days[0] === t - MS_DAY)) {
+    streak = 1;
+    for (let i = 1; i < days.length; i++) {
+      if (days[i - 1] - days[i] !== MS_DAY) break;
+      streak++;
+    }
+  }
+  return {
+    due: live.filter(k => cardStates[k].due <= t).length,
+    fresh: fresh.length,
+    locked: lockedCount,
+    started: withState.length,
+    total: allCards.length,
+    notes: Object.keys(NOTES).length,
+    startedNotes: new Set(withState.map(noteOf)).size,
+    retired: withState.length - live.length,
+    todayReviews: reviewLog.filter(e => e.ts >= t).length,
+    nextDue: future.length ? Math.min(...future) : null,
+    streak,
+  };
+}
+
+function row(label, value, cls){
+  return `<dt>${label}</dt><dd class="${cls || ""}">${value}</dd>`;
+}
+
+function renderCount(){
+  const left = queue.length;
+  const total = sessionDone + left;
+  countEl.textContent = total ? `${sessionDone} / ${total}` : "";
+  barEl.className = total ? "on" : "";
+  barEl.firstElementChild.style.width = total ? `${(sessionDone / total) * 100}%` : "0";
+}
+
+function renderDone(){
+  countEl.textContent = "";
+  barEl.className = "";
+  renderWarning();
+  const st = stats();
+  if (sessionDone && !extraMode) markDone(vocabLight ? "vocab-light" : "vocab");
+  const today = reviewLog.filter(e => e.ts >= t);
+  const good = today.filter(e => e.grade === "good").length;
+  const rate = today.length ? Math.round((good / today.length) * 100) : null;
+
+  /* What he should leave with, in order: you are finished, well done, come
+     back on this day. Locked cards are deliberately last, small and grey —
+     it is not something he can act on, and reading it as a backlog would be
+     discouraging. */
+  const when = st.nextDue == null ? null
+             : Math.round((midnight(st.nextDue) - t) / MS_DAY);
+  const back = when == null
+    ? "Add some words and come back."
+    : when <= 1 ? "Come back tomorrow." : `Come back in ${when} days.`;
+
+  appEl.innerHTML = `
+    <div class="stats done">
+      <p class="done-h">${!sessionDone ? "Nothing due right now"
+        : extraMode ? "Extra practice done"
+        : "That's everything for today"}</p>
+      ${sessionDone ? `<p class="done-sub">${extraMode
+        ? "The new words are saved. The practice was just practice."
+        : "Nice work."}</p>` : ""}
+      <p class="done-cta">${esc(back)}</p>
+      ${today.length ? `
+      <dl class="rows small">
+        ${row("Reviewed today", today.length)}
+        ${rate !== null ? row("Got it first time", rate + "%") : ""}
+        ${st.streak > 1 ? row("Days in a row", st.streak) : ""}
+        ${row("Words started", `${st.startedNotes} of ${st.notes}`)}
+        ${st.retired ? row("Finished for good", st.retired) : ""}
+      </dl>` : ""}
+      ${st.locked ? `<p class="aside">${st.locked} card${st.locked === 1 ? "" : "s"} ` +
+        `waiting in the wings (nothing to do about those — they turn up on ` +
+        `their own once a word is solid).</p>` : ""}
+    </div>
+    <button class="reveal alt" id="home">Back</button>
+    ${(!extraMode && extraAvailable())
+      ? `<button class="lighter" id="go-extra">Feel like more? ` +
+        `${EXTRA_NEW} new words and some practice</button>` : ""}`;
+  const home = $("#home");
+  if (home) home.addEventListener("click", renderLanding);
+  const gx = $("#go-extra");
+  if (gx) gx.addEventListener("click", startExtra);
+}
+
+/* ── rendering ──────────────────────────────────────────────────────
+   Grammatical labels are Dutch, the way a Dutch dictionary names them.
+   Every media element is optional: a note with no
+   image or audio simply renders without one, so the deck stays usable
+   while the media pipeline catches up. */
+const POS_NL = {
+  noun: "zelfstandig naamwoord", verb: "werkwoord",
+  adjective: "bijvoeglijk naamwoord", adverb: "bijwoord",
+  preposition: "voorzetsel", conjunction: "voegwoord", particle: "partikel",
+  pronoun: "voornaamwoord", interjection: "tussenwerpsel", numeral: "telwoord",
+};
+
+// Anything from the deck could contain < or &; it is rendered via innerHTML.
+const esc = s => String(s).replace(/[&<>"]/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* Part of speech only. Conjugation and plurals are deliberately not stored
+   — this is a vocabulary trainer, not a grammar reference, and the example
+   sentences are free to use whatever form reads naturally.
+
+   The one exception is the article, and it is not grammar in that sense:
+   de/het cannot be derived from the word, so it is part of the vocabulary
+   and lives on the note (`article`) rather than here. See headword(). */
+function grammar(n){
+  return `<div class="gram">${esc(POS_NL[n.pos] || n.pos)}</div>`;
+}
+
+/* A noun is shown, and must be produced, with its article: "het huis", never
+   "huis". Learning a Dutch noun without its de/het is learning two thirds of
+   it and having to go back for the rest. `word` stays bare because it is the
+   join key to vocab.csv, the sentence lemmas and the Commons recording; the
+   article is added only at display time. */
+const headword = n => n.article ? `${n.article} ${n.word}` : n.word;
+
+let audioSeq = 0;
+const audioBtns = [];
+function playBtn(src, label, extra){
+  if (!src) return "";
+  const id = `play${audioSeq++}`;
+  audioBtns.push({ id, src });
+  return `<button class="play${extra ? " " + extra : ""}" id="${id}" ` +
+         `aria-label="${esc(label)}">▶</button>`;
+}
+/* One Audio element per file, reused, and a bounded number of them.
+
+   A fresh `new Audio(src)` per play exhausts the browser's media pool after a
+   few dozen — WebKit is the strict one — and from then on playback fails
+   silently while already-created elements carry on working. That is exactly
+   the fault reported on 2026-08-30: sound fine at the start of a session,
+   dead halfway through, fixed by reloading the page, which is the one thing
+   that destroys every element. A 45-card session was creating well over a
+   hundred, and autoPlay swallowed the resulting error so nothing said so.
+
+   */
+/* One player element for the whole session, its src swapped per clip.
+
+   There are two faults here and only the second explains why fixing the first
+   did not help. A fresh `new Audio()` per play leaks media elements, and past
+   the browser's cap new ones fail silently — that was the first diagnosis, and
+   caching fixed it. It did not fix the symptom, because of the second fault:
+
+   a media element may only play if `play()` has been called on it during a
+   user gesture at least once. The preloader creates elements outside any
+   gesture, so once caching made playback reuse a preloaded element, the tap
+   was refused. It broke after a card or two — precisely when the preloader
+   had got far enough ahead — rather than after sixty. Before caching, the
+   click handler built a new element inside the gesture every time, which is
+   always allowed, so the button had always worked.
+
+   One element fixes both. It cannot exhaust a pool, and the first play that
+   happens inside a tap unlocks it for the rest of the session. Preloading no
+   longer needs a media element at all: fetch warms the same HTTP cache, and
+   the player reads from it when it gets there. */
+const player = new Audio();
+player.preload = "auto";
+
+function playSound(src){
+  if (!src) return Promise.resolve();
+  const abs = new URL(src, location.href).href;
+  try { player.pause(); } catch (e) {}
+  if (player.src !== abs) {
+    player.src = src;
+  } else {
+    // Rewinding an element whose metadata has not arrived throws; a fresh
+    // src does not need it anyway.
+    try { player.currentTime = 0; } catch (e) {}
+  }
+  return player.play();
+}
+function autoPlay(src){
+  if (!src) return;
+  playSound(src).catch(() => {});   // blocked is fine, button remains
+}
+
+/* Media for the cards just behind this one. Without it every card fetches
+   its own image at the moment it is drawn, which reads as a beat of blank
+   space on the flip. The bytes are not the problem — 38 KB median — the
+   round trip is, so what matters is starting it early rather than making it
+   smaller. Three ahead keeps well in front of him without pulling a whole
+   session down at once, and the set stops us asking twice. */
+const PRELOAD_AHEAD = 3;
+const preloaded = new Set();
+function preload(url){
+  if (!url || preloaded.has(url)) return;
+  preloaded.add(url);
+  if (/\.(webp|png|jpe?g|gif)$/i.test(url)) { new Image().src = url; return; }
+  // Warm the HTTP cache without creating a media element. An element made
+  // here could never be played anyway — see the player comment above.
+  fetch(url, { cache: "force-cache" }).catch(() => {});
+}
+function preloadAhead(){
+  for (const key of queue.slice(0, PRELOAD_AHEAD + 1)) {
+    const n = NOTES[noteOf(key)];
+    if (!n) continue;
+    preload(n.image);
+    preload(n.audio);
+    preload((n.sentence || {}).audio);
+  }
+}
+
+function wireAudio(){
+  for (const { id, src } of audioBtns.splice(0)) {
+    const el = $("#" + id);
+    if (el) el.addEventListener("click", () => playSound(src).catch(e => {
+      /* Every rejection here is worth reporting, NotAllowedError included.
+         That name means "no user gesture", and this *is* the user's tap — so
+         on this path it does not mean autoplay was blocked, it means the
+         element itself was refused. Ignoring it is why a whole session could
+         go silent with nothing on screen saying so: the student was told
+         nothing, and neither were we. Only an abort from a clip being
+         replaced is routine. */
+      if (e.name !== "AbortError") {
+        writeError = new Error(`audio failed (${e.name}): ${src}`);
+        renderWarning();
+      }
+    }));
+  }
+}
+
+/* ── the four card types ────────────────────────────────────────────
+   Each note can produce up to four cards, each testing a different
+   direction. Which pieces appear where is the whole design:
+
+     recognition  NL word + audio + IPA  ->  meaning, image, sentence
+     production   image + English        ->  the Dutch word (with de/het)
+     listening    the recording alone    ->  everything else
+     form         gapped sentence + cue  ->  the inflected form
+
+   Nothing is shown on a front that would give the answer away — the
+   listening front is deliberately bare, and production withholds both the
+   Dutch word and its audio. */
+const pieces = {
+  word:    n => `<div class="front">${esc(headword(n))}</div>`,
+  ipa:     n => n.ipa ? `<div class="ipa">[${esc(n.ipa)}]</div>` : "",
+  gloss:   n => `<div class="back">${esc(n.gloss)}</div>`,
+  image:   n => n.image
+    ? `<img src="${esc(n.image)}" alt="${esc(n.image_alt || "")}">` : "",
+  note:    n => n.note ? `<div class="note">${esc(n.note)}</div>` : "",
+  audio:   n => playBtn(n.audio, `play ${n.word}`),
+  sentenceEn: n => (n.sentence && n.sentence.en)
+    ? `<div class="sent-en">${esc(n.sentence.en)}</div>` : "",
+  sentenceAudio: n => playBtn((n.sentence || {}).audio, "play the sentence"),
+  sentence: n => (n.sentence && n.sentence.nl) ? `
+    <div class="sent">
+      <div class="sent-nl">${esc(n.sentence.nl)}${playBtn(n.sentence.audio, "play the sentence")}</div>
+      <div class="sent-en">${esc(n.sentence.en || "")}</div>
+    </div>` : "",
+  gapped:  n => (n.sentence && n.sentence.gap) ? `
+    <div class="sent"><div class="sent-gap">${esc(n.sentence.gap)}</div></div>` : "",
+};
+
+const LAYOUT = {
+  /* An inflection drill, not a vocabulary card — in Dutch, mostly for the
+     strong verbs, whose past forms (liep, gelopen) are vocabulary in their
+     own right. The bracketed cue names the verb, because a gap that several
+     verbs would fill is a card with two right answers, which grades nothing. */
+  form: {
+    front: ["image", "formGap"],
+    back:  ["formFull", "sentenceAudio", "sentenceEn", "image"],
+  },
+  recognition: {
+    front: ["word", "audio", "ipa"],
+    back:  ["word", "audio", "ipa", "gloss", "image", "sentence", "note"],
+  },
+  production: {
+    front: ["image", "gloss", "note", "gapped"],
+    back:  ["word", "audio", "ipa", "image", "gloss", "sentence", "note"],
+  },
+  listening: {
+    front: ["audioOnly"],
+    back:  ["word", "audio", "ipa", "gloss", "image", "sentence", "note"],
+  },
+};
+
+// Fronts that are not simply a stack of the shared pieces.
+const special = {
+  formGap:  n => `<div class="cloze">${esc((n.sentence || {}).gap || "")}` +
+    (n.parent && NOTES[n.parent] ? ` <em class="cue">(${esc(NOTES[n.parent].word)})</em>` : "") +
+    `</div>`,
+  formFull: n => {
+    const s = n.sentence || {};
+    return `<div class="cloze">${esc(s.gap || "").replace("___",
+      `<b>${esc(s.answer || "")}</b>`)}</div>`;
+  },
+  // Deliberately not "play <word>": the label is the answer.
+  audioOnly: n => playBtn(n.audio, "play the recording", "play-big"),
+};
+
+/* Every front says what it is asking. Production especially: an image and an
+   English word look exactly like a comprehension card until you notice you
+   are meant to produce the Dutch. */
+const TASK = {
+  form:        "Vul in — fill in the gap",
+  recognition: "What does this mean?",
+  production:  "How do you say this in Dutch?",
+  listening:   "What does this word mean?",
+};
+/* The listening card has nothing to read. A silent phone would make it look
+   broken rather than hard, so say where the question is. A noun's production
+   card says the article is part of the answer — otherwise "huis" feels right
+   and the grade has to be argued with yourself after the flip. */
+const SUBTASK = {
+  listening: "This card is sound only — turn your volume up.",
+  productionNoun: "With de or het.",
+};
+const subtaskFor = (n, type) =>
+  type === "production" && n.article ? SUBTASK.productionNoun : SUBTASK[type];
+
+function side(n, type, which){
+  const names = (LAYOUT[type] || LAYOUT.recognition)[which];
+  const body = names.map(k => (special[k] || pieces[k])(n)).join("\n      ");
+  const task = which === "front" && TASK[type]
+    ? `<div class="task">${esc(TASK[type])}</div>\n      ` : "";
+  const subText = which === "front" && subtaskFor(n, type);
+  const sub = subText
+    ? `<div class="task-sub">${esc(subText)}</div>\n      ` : "";
+  return task + sub + body;
+}
+
+function renderCard(){
+  revealed = false;
+  current = queue[0];
+  const n = NOTES[noteOf(current)];
+  const type = typeOf(current);
+  renderCount();
+  renderWarning();
+  appEl.innerHTML = `
+    <div class="card">
+      ${side(n, type, "front")}
+    </div>
+    <button class="reveal" id="reveal">Show answer</button>
+  `;
+  wireAudio();
+  preloadAhead();
+  // Sticky user activation from the previous tap usually lets this through;
+  // if the browser refuses, the button is still there. See wireAudio.
+  if (type === "listening" || type === "recognition") autoPlay(n.audio);
+  $("#reveal").addEventListener("click", showBack);
+}
+
+function showBack(){
+  if (revealed) return;
+  revealed = true;
+  const n = NOTES[noteOf(current)];
+  const type = typeOf(current);
+  appEl.innerHTML = `
+    <div class="card">
+      ${side(n, type, "back")}
+      ${grammar(n)}
+    </div>
+    <div class="grades">
+      <button class="g-again" id="again">Again</button>
+      <button class="g-good" id="good">Good</button>
+    </div>
+  `;
+  wireAudio();
+  autoPlay((n.sentence || {}).audio);
+  $("#again").addEventListener("click", () => grade("again"));
+  $("#good").addEventListener("click", () => grade("good"));
+}
+
+function grade(g){
+  const key = queue.shift();
+  const isNew = !cardStates[key];
+  const next = schedule(cardStates[key] || newCardState(), g, key);
+  // Stamped whichever way it was graded — it was still introduced today.
+  if (isNew) next.introduced = today();
+
+  sessionDone++;
+  /* A practice review is not a review. It changes nothing — not the stored
+     card, not the one in memory, and not the log.
+
+     Leaving it out of the log matters because progress.py buckets the log by
+     grade for the streak, the day counts and the accuracy, so a card answered
+     out of turn would corrupt all three. Leaving cardStates alone matters for a quieter reason: the
+     schedule is computed from the current state, so a practice answer that
+     moved it in memory would silently become the starting point for the next
+     real answer in the same page session. */
+  if (!extraMode || extraSaves.has(key)) {
+    cardStates[key] = next;
+    const entry = { card: key, grade: g, ts: Date.now() };
+    reviewLog.push(entry);
+    queueWrite(key, next, entry);
+  }
+
+  /* Bury siblings. A note's other cards test the same word from another
+     angle, and having just seen the answer he would pass them on recall of
+     the last ten seconds rather than of the word — which teaches the
+     scheduler the wrong thing. They come back tomorrow. Done before the
+     "again" splice below, since that card is its own sibling. */
+  queue = queue.filter(k => noteOf(k) !== noteOf(key));
+
+  if (g === "again") {
+    // resurface later this session rather than only tomorrow
+    queue.splice(Math.min(queue.length, 3), 0, key);
+  }
+
+  queue.length ? renderCard() : renderDone();
+}
+
+
+/* ══ landing ═══════════════════════════════════════════════════════
+   One tile stating its size, so it is clear what is being committed to. A
+   satisfied mode is greyed and not tappable: tapping in and landing on
+   "nothing due" reads as broken rather than finished. */
+const modeLabel = $("#mode-label");
+
+/* Which modes were finished on which day, so a reload or a second device
+   does not re-offer a session already done. `done` keys are bare digits,
+   which are not legal in a dotted field path — hence the whole-map write. */
+function markDone(mode){
+  const day = String(t);
+  const list = new Set(doneDays[day] || []);
+  if (list.has(mode)) return;
+  list.add(mode);
+  doneDays[day] = [...list];
+  // A few bytes a day, but it should not grow forever.
+  for (const d of Object.keys(doneDays))
+    if (t - Number(d) > 90 * MS_DAY) delete doneDays[d];
+  if (READ_ONLY) return;
+  writeChain = writeChain
+    .then(() => docExists
+      ? write.update(docRef, "done", doneDays, "updated", Date.now())
+      : firstWrite())
+    .then(() => { writeError = null; })
+    .catch(e => { writeError = e; console.error("save failed", e); })
+    .finally(renderWarning);
+}
+
+function startVocab(light){
+  vocabLight = !!light;
+  queue = light ? [...dueCards] : interleave(dueCards, fresh);
+  modeLabel.textContent = "Vocab";
+  renderCard();
+}
+
+/* Extra study — offered only once the day is already done, so "finished"
+   keeps meaning finished and this never reads as something outstanding.
+
+   Three genuinely new words, which save, plus practice on the cards he is
+   weakest at, which do not. Weakest rather than soonest-due: nothing is being
+   scheduled here, so the only question is where the repetition does most
+   good, and that is the low-ease cards. */
+function extraPlan(){
+  const fresh3 = bankOrder(shuffle([...allCards]))
+    .filter(k => !cardStates[k] && introducible(k) && unlocked(k))
+    .filter((k, i, all) => all.findIndex(j => noteOf(j) === noteOf(k)) === i)
+    .slice(0, EXTRA_NEW);
+  const practice = Object.keys(cardStates)
+    .filter(k => NOTES[noteOf(k)] && !fresh3.includes(k) && !cardRetired(k))
+    .sort((a, b) => (cardStates[a].ease || 2.5) - (cardStates[b].ease || 2.5))
+    .slice(0, EXTRA_PRACTICE);
+  return { fresh3, practice };
+}
+
+function extraAvailable(){
+  const { fresh3, practice } = extraPlan();
+  return fresh3.length + practice.length;
+}
+
+function startExtra(){
+  const { fresh3, practice } = extraPlan();
+  extraMode = true;
+  extraSaves = new Set(fresh3);       // fixed now, not re-tested per grade
+  sessionDone = 0;
+  vocabLight = false;
+  queue = interleave(shuffle(practice), fresh3);
+  countExtraRun();
+  modeLabel.textContent = "Extra";
+  renderCard();
+}
+
+function countExtraRun(){
+  const day = String(t);
+  extraRuns[day] = (extraRuns[day] || 0) + 1;
+  for (const d of Object.keys(extraRuns))
+    if (t - Number(d) > 90 * MS_DAY) delete extraRuns[d];
+  if (READ_ONLY) return;
+  writeChain = writeChain
+    .then(() => docExists
+      ? write.update(docRef, new FieldPath("extra", day), extraRuns[day],
+                     "updated", Date.now())
+      : firstWrite())
+    .then(() => { writeError = null; })
+    .catch(e => { writeError = e; console.error("save failed", e); })
+    .finally(renderWarning);
+}
+
+const vocabDone = () => {
+  const d = doneDays[String(t)] || [];
+  return d.includes("vocab") ? "full" : d.includes("vocab-light") ? "light" : null;
+};
+
+function vocabPending(){
+  // Read from `done`, not from the queue: after a light session the new cards
+  // are still sitting in `fresh`, and a reload would otherwise re-offer them.
+  return vocabDone() ? 0 : queue.length;
+}
+function renderLanding(){
+  modeLabel.textContent = "Nederlands";
+  countEl.textContent = "";
+  barEl.className = "";
+  renderWarning();
+  const s = stats();
+  const v = vocabPending();
+  const light = v && dueCards.length && fresh.length;
+  const tile = (id, name, sub) =>
+    `<button class="mode lead" id="${id}">` +
+    `<span class="mode-n">${name}</span><span class="mode-sub">${esc(sub)}</span></button>`;
+  const idle = (name, sub) =>
+    `<div class="mode is-done"><span class="mode-n">${name}</span>` +
+    `<span class="mode-sub">${esc(sub)}</span></div>`;
+
+  const when = s.nextDue == null ? null
+             : Math.round((midnight(s.nextDue) - t) / MS_DAY);
+  const back = !s.notes ? "The deck is empty — add some words."
+             : when == null ? "Add some words and come back."
+             : when <= 1 ? "Come back tomorrow." : `Come back in ${when} days.`;
+
+  appEl.innerHTML = `
+    <div class="modes">
+      ${v ? tile("go-vocab", "Vocab", `${v} card${v === 1 ? "" : "s"} due`)
+          : idle("Vocab", vocabDone() === "full" ? "✓ done today"
+                        : vocabDone() === "light" ? "✓ reviews only"
+                        : "nothing due")}
+      ${light ? `<button class="lighter" id="go-light">Tired? Just the ` +
+        `${dueCards.length} review${dueCards.length === 1 ? "" : "s"}, no new words</button>` : ""}
+    </div>
+    ${!v ? `<div class="stats done">
+      <p class="done-h">${s.notes ? "All done for today" : "Nothing here yet"}</p>
+      <p class="done-cta">${esc(back)}</p>
+    </div>
+    ${extraAvailable() ? `<button class="lighter" id="go-extra">Feel like more? ` +
+      `${EXTRA_NEW} new words and some practice</button>` : ""}` : ""}
+    <div class="stats">
+      <h2>So far</h2>
+      <dl class="rows">
+        ${row("Words started", `${s.startedNotes} of ${s.notes}`)}
+        ${row("Cards started", `${s.started} of ${s.total}`)}
+        ${s.streak ? row("Days in a row", s.streak) : ""}
+        ${s.todayReviews ? row("Answered today", s.todayReviews) : ""}
+      </dl>
+    </div>`;
+  const gv = $("#go-vocab");
+  if (gv) gv.addEventListener("click", () => startVocab(false));
+  const gl = $("#go-light");
+  if (gl) gl.addEventListener("click", () => startVocab(true));
+  const gx = $("#go-extra");
+  if (gx) gx.addEventListener("click", startExtra);
+}
+
+/* ══ boot ══════════════════════════════════════════════════════════ */
+renderLanding();
+</script>
+</body>
+</html>
